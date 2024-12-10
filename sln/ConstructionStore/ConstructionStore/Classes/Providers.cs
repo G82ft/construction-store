@@ -1,7 +1,7 @@
 ﻿namespace ConstructionStore
 {
-    public class Providers
+    public partial class Providers
     {
-        
+        public string FullNameAndCountry => $"{ProviderTypes.Name} \"{Name}\" ({Countries.Name})";
     }
 }

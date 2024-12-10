@@ -30,9 +30,8 @@ namespace ConstructionStore
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<ProductTypes> ProductTypes { get; set; }
         public virtual DbSet<Providers> Providers { get; set; }
-        public virtual DbSet<ProviderType> ProviderType { get; set; }
+        public virtual DbSet<ProviderTypes> ProviderTypes { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }

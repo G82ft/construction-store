@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Providers.cs" />
     <Compile Include="Countries.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -90,13 +91,10 @@
     <Compile Include="Providers.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProviderType.cs">
+    <Compile Include="ProviderTypes.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagrams.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Users.cs">
@@ -163,6 +161,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\5color15mm10m.jpg" />
+    <Resource Include="Images\accumulator_drill.jpg" />
+    <Resource Include="Images\black19mm20m.jpg" />
+    <Resource Include="Images\blue19mm20m.jpg" />
+    <Resource Include="Images\brus.jpg" />
+    <Resource Include="Images\brusok.jpg" />
+    <Resource Include="Images\drill.jpg" />
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model.Context.cs</LastGenOutput>
@@ -177,5 +182,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

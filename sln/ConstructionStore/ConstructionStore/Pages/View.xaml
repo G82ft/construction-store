@@ -4,9 +4,54 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:ConstructionStore.Pages"
+      xmlns:constructionStore="clr-namespace:ConstructionStore"
       mc:Ignorable="d"
       Title="View" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBox x:Name="search" TextChanged="OnSearchChanged"/>
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox x:Name="types" DropDownClosed="OnFilterClosed"/>
+                <ComboBox Grid.Column="1" x:Name="providers" DropDownClosed="OnFilterClosed"/>
+                <ComboBox Grid.Column="2" x:Name="orderHow" DropDownClosed="OnFilterClosed"/>
+            </Grid>
+            <StackPanel x:Name="edit">
+                <Button Content="Добавить товар" x:Name="add"/>
+            </StackPanel>
+        </StackPanel>
+        <ListView Grid.Row="1" x:Name="listView" d:ItemsSource="{d:SampleData}" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type constructionStore:Products}">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="25" Padding="5,20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20*"/>
+                                <ColumnDefinition Width="400"/>
+                                <ColumnDefinition Width="20*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" TextWrapping="Wrap" MaxWidth="380" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding ProductTypes.Name, StringFormat=Тип: {0}}"/>
+                                <TextBlock Text="{Binding Providers.FullNameAndCountry}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="{Binding Price, StringFormat={}{0} руб.}"/>
+                                <TextBlock Text="{Binding EachPackAmount, StringFormat=В одной упаковке {0} шт.}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
