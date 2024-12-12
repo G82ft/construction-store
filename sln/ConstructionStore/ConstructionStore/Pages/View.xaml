@@ -30,10 +30,8 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Content="Корзина" Click="ToCart"/>
-                <Button Grid.Column="1" Content="Заказы" Click="ToOrders"/>
             </Grid>
         </StackPanel>
         <ListView Grid.Row="1" x:Name="listView" d:ItemsSource="{d:SampleData}" HorizontalContentAlignment="Stretch">

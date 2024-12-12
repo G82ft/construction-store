@@ -55,8 +55,6 @@ namespace ConstructionStore.Pages
             }
 
             if (!Validate()) return;
-            Console.WriteLine(role.SelectedIndex);
-            Console.WriteLine(role.Text);
             user = new Users
             {
                 Login = loginText,
