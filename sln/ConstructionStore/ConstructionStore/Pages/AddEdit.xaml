@@ -1,0 +1,48 @@
+﻿<Page x:Class="ConstructionStore.Pages.AddEdit"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ConstructionStore.Pages"
+      mc:Ignorable="d"
+      Title="AddEdit" Height="450" Width="800">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Width" Value="125"/>
+            </Style>
+            <Style x:Key="Field">
+                <Setter Property="Control.Width" Value="150"/>
+            </Style>
+        </StackPanel.Resources>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Название"/>
+            <TextBox Style="{StaticResource Field}" x:Name="name" Text="{Binding product.Name}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Тип продукта"/>
+            <ComboBox Style="{StaticResource Field}" ItemsSource="{Binding types}" SelectedValue="{Binding product.Type, Mode=TwoWay}" SelectedValuePath="ID" DisplayMemberPath="Name"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Производитель"/>
+            <ComboBox Style="{StaticResource Field}" ItemsSource="{Binding providers}" SelectedValue="{Binding product.Provider, Mode=TwoWay}" SelectedValuePath="ID" DisplayMemberPath="Name"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Изображение"/>
+            <ComboBox Style="{StaticResource Field}" ItemsSource="{Binding images}" SelectedValue="{Binding product.Image, Mode=TwoWay}" SelectedValuePath="ID" DisplayMemberPath="Path"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Цена за упаковку"/>
+            <TextBox Style="{StaticResource Field}" x:Name="price" Text="{Binding product.Price}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="В одной упаковке"/>
+            <TextBox Style="{StaticResource Field}" x:Name="amount" Text="{Binding product.EachPackAmount}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Отмена" Width="125" Click="Cancel"/>
+            <Button Content="Подтвердить" Style="{StaticResource Field}" Click="Save"/>
+        </StackPanel>
+        <Button x:Name="delete" Content="Удалить" Background="Red" Foreground="White" Click="Delete"/>
+    </StackPanel>
+</Page>

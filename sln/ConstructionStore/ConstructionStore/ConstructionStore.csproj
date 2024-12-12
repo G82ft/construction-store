@@ -64,6 +64,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cart.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Images.cs" />
     <Compile Include="Classes\Providers.cs" />
     <Compile Include="Countries.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -76,8 +80,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddEdit.xaml.cs">
+      <DependentUpon>AddEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Auth.xaml.cs">
       <DependentUpon>Auth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Cart.xaml.cs">
+      <DependentUpon>Cart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
@@ -113,7 +123,12 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AddEdit.xaml" />
     <Page Include="Pages\Auth.xaml" />
+    <Page Include="Pages\Cart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\View.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +183,7 @@
     <Resource Include="Images\brus.jpg" />
     <Resource Include="Images\brusok.jpg" />
     <Resource Include="Images\drill.jpg" />
+    <Resource Include="Images\default.jpg" />
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model.Context.cs</LastGenOutput>

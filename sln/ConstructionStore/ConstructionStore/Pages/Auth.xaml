@@ -48,11 +48,12 @@
         <StackPanel x:Name="edit" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Роль" Style="{StaticResource Label}"/>
-                <ComboBox x:Name="role" Style="{StaticResource Box}"/>
+                <ComboBox x:Name="role" Style="{StaticResource Box}" DisplayMemberPath="Name"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Войти" Width="200" Click="OnClick"/>
+        <StackPanel Orientation="Vertical">
+            <Button x:Name="confirm" Content="Зарегестрироваться" Width="200" Click="OnClick"/>
+            <CheckBox x:Name="isRegistring" Content="Войти" HorizontalAlignment="Center" IsChecked="{Binding register}"/>
         </StackPanel>
     </StackPanel>
 </Page>

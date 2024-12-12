@@ -14,6 +14,12 @@ namespace ConstructionStore
     
     public partial class Users
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Users()
+        {
+            this.Cart = new HashSet<Cart>();
+        }
+    
         public int ID { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
@@ -24,5 +30,7 @@ namespace ConstructionStore
         public int Role { get; set; }
     
         public virtual Roles Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Cart { get; set; }
     }
 }

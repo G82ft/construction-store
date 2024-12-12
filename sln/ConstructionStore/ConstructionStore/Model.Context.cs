@@ -15,9 +15,19 @@ namespace ConstructionStore
     
     public partial class ConstructionStoreEntities : DbContext
     {
+        private static ConstructionStoreEntities _context;
         public ConstructionStoreEntities()
             : base("name=ConstructionStoreEntities")
         {
+        }
+
+        public static ConstructionStoreEntities GetContext()
+        {
+            if (_context == null)
+            {
+                _context = new ConstructionStoreEntities();
+            }
+            return _context;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -33,5 +43,6 @@ namespace ConstructionStore
         public virtual DbSet<ProviderTypes> ProviderTypes { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Cart> Cart { get; set; }
     }
 }

@@ -24,21 +24,30 @@
                 <ComboBox Grid.Column="1" x:Name="providers" DropDownClosed="OnFilterClosed"/>
                 <ComboBox Grid.Column="2" x:Name="orderHow" DropDownClosed="OnFilterClosed"/>
             </Grid>
-            <StackPanel x:Name="edit">
-                <Button Content="Добавить товар" x:Name="add"/>
+            <StackPanel>
+                <Button Content="Добавить товар" x:Name="add" Click="Add"/>
             </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Корзина" Click="ToCart"/>
+                <Button Grid.Column="1" Content="Заказы" Click="ToOrders"/>
+            </Grid>
         </StackPanel>
         <ListView Grid.Row="1" x:Name="listView" d:ItemsSource="{d:SampleData}" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type constructionStore:Products}">
                     <Border BorderBrush="Black" BorderThickness="1" CornerRadius="25" Padding="5,20">
-                        <Grid>
+                        <Grid MouseLeftButtonUp="Edit">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20*"/>
+                                <ColumnDefinition Width="175"/>
                                 <ColumnDefinition Width="400"/>
-                                <ColumnDefinition Width="20*"/>
+                                <ColumnDefinition Width="175"/>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0"/>
+                            <TextBlock Text="{Binding ID}" Visibility="Collapsed"/>
+                            <Image Grid.Column="0" Source="{Binding Images.ImagePath}" MaxWidth="150"/>
                             <StackPanel Grid.Column="1">
                                 <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" TextWrapping="Wrap" MaxWidth="380" HorizontalAlignment="Left"/>
                                 <TextBlock Text="{Binding ProductTypes.Name, StringFormat=Тип: {0}}"/>
@@ -46,7 +55,8 @@
                             </StackPanel>
                             <StackPanel Grid.Column="2">
                                 <TextBlock Text="{Binding Price, StringFormat={}{0} руб.}"/>
-                                <TextBlock Text="{Binding EachPackAmount, StringFormat=В одной упаковке {0} шт.}"/>
+                                <TextBlock Text="{Binding EachPackAmount, StringFormat=В упаковке {0} шт.}"/>
+                                <Button Tag="{Binding ID}" Content="В корзину" Click="AddToCart"/>
                             </StackPanel>
                         </Grid>
                     </Border>

@@ -1,0 +1,61 @@
+﻿<Page x:Class="ConstructionStore.Pages.Cart"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ConstructionStore.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Cart">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="listView" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="25" Padding="5,20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="170"/>
+                                <ColumnDefinition Width="400"/>
+                                <ColumnDefinition Width="170"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Key.ID}" Visibility="Collapsed"/>
+                            <Image Grid.Column="0" Source="{Binding Key.Images.ImagePath}" MaxWidth="150"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding Key.Name}" FontWeight="Bold" FontSize="16" TextWrapping="Wrap" MaxWidth="380" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding Key.ProductTypes.Name, StringFormat=Тип: {0}}"/>
+                                <TextBlock Text="{Binding Key.Providers.FullNameAndCountry}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="{Binding Key.Price, StringFormat={}{0} руб.}"/>
+                                <TextBlock Text="{Binding Key.EachPackAmount, StringFormat=В упаковке {0} шт.}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Tag="{Binding Key.ID}" Content="-" Click="SubAmount"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Value}" TextAlignment="Center"/>
+                                    <Button Tag="{Binding Key.ID}" Grid.Column="2" Content="+" Click="AddAmount"/>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Назад" Click="Back"/>
+            <Button Grid.Column="1" Content="Заказать" Click="OrderFromCart"/>
+        </Grid> 
+    </Grid>
+</Page>

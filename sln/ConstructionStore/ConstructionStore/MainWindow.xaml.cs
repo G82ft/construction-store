@@ -25,7 +25,8 @@ namespace ConstructionStore
             InitializeComponent();
             AppData.Frame = FrameMain;
             AppData.Model = new ConstructionStoreEntities();
-            AppData.Frame.Navigate(new Pages.View());
+            AppData.cart = new Dictionary<Products, int>();
+            AppData.Frame.Navigate(new Pages.Auth());
         }
     }
 }

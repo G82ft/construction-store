@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,19 +9,38 @@ namespace ConstructionStore.Pages
 {
     public partial class Auth : Page
     {
+        public const string signIn = "Войти";
+        public const string signUp = "Зарегестрироваться";
         private bool _register;
-        public Auth(bool register = true)
+        public bool register
         {
-            _register = register;
+            get => _register;
+            set
+            {
+                _register = value;
+                registration.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+                confirm.Content = value ? signUp : signIn;
+                isRegistring.Content = value ? signIn : signUp;
+            }
+        }
+        public Button ConfirmButton => confirm;
+
+        public Auth(bool register = true, bool testing = false)
+        {
             InitializeComponent();
+            this.register = register;
+            if (testing) return;
             role.ItemsSource = AppData.Model.Roles.ToList();
+            role.SelectedIndex = 0;
+            DataContext = this;
         }
 
         private void OnClick(object sender, RoutedEventArgs e)
         {
             Users user;
-            string loginText = login.Text, pwd = password.Password; 
-            if (!_register)
+            string loginText = login.Text, pwd = password.Password;
+
+            if (!register)
             {
                 user = AppData.Model.Users.FirstOrDefault(x => x.Login == loginText && x.Password == pwd);
                 if (user == null)
@@ -28,12 +48,15 @@ namespace ConstructionStore.Pages
                     MessageBox.Show("Неверный логин или пароль!");
                     return;
                 }
-                AppData.ShowInfo($"Добро пожаловать, {user.LastName} {user.FirstName} {user.Patronymic}!");
-                AppData.Frame.Navigate(null);
+                AppData.ShowInfo($"Добро пожаловать, {user.Roles.Name} {user.LastName} {user.FirstName} {user.Patronymic}!");
+                AppData.user = user;
+                AppData.Frame.Navigate(new View());
                 return;
             }
 
             if (!Validate()) return;
+            Console.WriteLine(role.SelectedIndex);
+            Console.WriteLine(role.Text);
             user = new Users
             {
                 Login = loginText,
@@ -48,7 +71,21 @@ namespace ConstructionStore.Pages
             AppData.Model.Users.Add(user);
             AppData.Model.SaveChanges();
             AppData.ShowInfo("Регистрация успешна!");
-            AppData.Frame.Navigate(null);
+            AppData.user = user;
+            AppData.Frame.Navigate(new View());
+        }
+
+        public bool Authorize(string loginText, string pwd)
+        {
+            try
+            {
+                return AppData.Model.Users.Any(x => x.Login == loginText && x.Password == pwd);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return true;
         }
 
         private bool Validate()
@@ -87,6 +124,11 @@ namespace ConstructionStore.Pages
             }
             
             return true;
+        }
+
+        private void SwitchRegister(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
